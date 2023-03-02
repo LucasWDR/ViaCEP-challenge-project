@@ -26,9 +26,9 @@ export class AddressController {
     })
     @Get('/find-cep')
     public getCepbyAPI(): Promise<any> {
-
         try {
-            return this.addressService.getCepByAPI()
+            //Aqui ta passando
+            return this.addressService.getCepByAPI();
         } catch (error) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
