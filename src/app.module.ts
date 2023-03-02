@@ -3,7 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AddressModule } from './domain/address/address.module';
+import { AddressModule } from 'src/address/address.module';
+import { DataSource } from 'typeorm';
+import { Address } from './address/entities/address.entity';
 
 @Module({
   imports: [
@@ -14,11 +16,15 @@ import { AddressModule } from './domain/address/address.module';
       port: 5432, //porta do postgres padrão
       database: 'postgres', //nome do banco 
       username: 'postgres',
-      password: '123456789'
+      password: '123456789',
+      entities: [Address],
+      synchronize: true,
     }),
     AddressModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}
