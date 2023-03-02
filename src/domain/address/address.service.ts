@@ -5,7 +5,7 @@ import axios from '@nestjs/axios';
 @Injectable()
 
 export class AddressService {
-    constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly httpService: HttpService) { }
 
   async getCepByAPI(): Promise<any> {
     try {
@@ -13,28 +13,25 @@ export class AddressService {
       const uri = 'https://viacep.com.br';
       const url = `${uri}/ws/${cep}/json/`;
 
-      console.log(url)
-
       const response = await this.httpService
-      .get(url)
-      .toPromise()
-      .then(res => {
-        const result = res.data;
-        const fileds = {
-          cep: result.cep,
-          logradouro: result.logradouro,
-          complemento: result.complemento,
-          bairro: result.bairro,
-          localidade: result.localidade,
-          uf: result.uf,
-          unidade: result.unidade,
-          ibge: result.ibge,
-          gia: result.gia,
-        };
-        return fileds;
-      });
+        .get(url)
+        .toPromise()
+        .then(res => {
+          const result = res.data;
+          const fileds = {
+            cep: result.cep,
+            logradouro: result.logradouro,
+            complemento: result.complemento,
+            bairro: result.bairro,
+            localidade: result.localidade,
+            uf: result.uf,
+            unidade: result.unidade,
+            ibge: result.ibge,
+            gia: result.gia,
+          };
+          return fileds;
+        });
 
-      console.log(response)
       if (!response) {
         throw new Error('Não foi possível realizar a consulta de endereço');
       }
