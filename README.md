@@ -88,6 +88,8 @@ $ npm run test:cov
   <li>Foi utilizado no projeto o banco de dados PostgreSQL</li>
 </ul>
 
+Crie um arquivo `.env` baseado no `.env.example` na raíz do projeto e altere a variável `POSTGRES_PASSWORD` para qual você desejar, pois iremos subir um container no docker com o banco de dados.
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
