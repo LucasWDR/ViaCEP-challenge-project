@@ -1,6 +1,6 @@
-import { Controller, Get, HttpException, HttpStatus } from "@nestjs/common";
+import { Controller, Get, HttpException, HttpStatus, Param } from "@nestjs/common";
 /* const Axios = use('axios'); */
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiParam, ApiResponse } from '@nestjs/swagger';
 import { AddressService } from "./address.service";
 
 
@@ -24,11 +24,13 @@ export class AddressController {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         description: 'Internal Server Error',
     })
-    @Get('/find-cep')
-    public getCepbyAPI(): Promise<any> {
+    @Get('/find-cep/:cep')
+    async getCepbyAPI(
+      @Param('cep') cep: string,
+    ): Promise<any> {
         try {
-            //Aqui ta passando
-            return this.addressService.getCepByAPI();
+
+            return this.addressService.getCepByAPI(cep);
         } catch (error) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,

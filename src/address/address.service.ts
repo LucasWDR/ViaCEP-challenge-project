@@ -1,41 +1,58 @@
 import { HttpService } from '@nestjs/axios/dist';
 import { Injectable } from '@nestjs/common';
-import axios from '@nestjs/axios';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateAddressDto } from './dtos/create-address.dto';
+import { Address } from './entities/address.entity';
+import { AddressRepository } from './respositories/address.repository';
 
 @Injectable()
 
 export class AddressService {
-  constructor(private readonly httpService: HttpService) { }
+  constructor(
+    private readonly httpService: HttpService,
+    @InjectRepository(Address)
+    private addressRepository: Repository<Address>
+  ) { }
 
-  async getCepByAPI(): Promise<any> {
+  async getCepByAPI(cep): Promise<any> {
     try {
-      const cep = '95538000';
-      const uri = 'https://viacep.com.br';
-      const url = `${uri}/ws/${cep}/json/`;
+      //falta resolver aqui
+      const address = await this.addressRepository.findOneOrFail({
+        where: {
+          cep: cep
+        }   
+      });
+      console.log(address)
+      if (!address || []) {
+        const uri = 'https://viacep.com.br';
+        const url = `${uri}/ws/${cep}/json/`;
 
-      const response = await this.httpService
-        .get(url)
-        .toPromise()
-        .then(res => {
-          const result = res.data;
-          const fileds = {
-            cep: result.cep,
-            logradouro: result.logradouro,
-            complemento: result.complemento,
-            bairro: result.bairro,
-            localidade: result.localidade,
-            uf: result.uf,
-            unidade: result.unidade,
-            ibge: result.ibge,
-            gia: result.gia,
-          };
-          return fileds;
-        });
+        const response = await this.httpService
+          .get(url)
+          .toPromise()
+          .then(res => {
+            const result = res.data;
+            const fileds = {
+              cep: result.cep,
+              publicPlace: result.logradouro,
+              neighborhood: result.bairro,
+              county: result.localidade,
+              uf: result.uf,
+            };
+            return fileds;
+          });
 
-      if (!response) {
-        throw new Error('Não foi possível realizar a consulta de endereço');
+          this.addressRepository.save(response)
+
+          console.log(response)
+        if (!response) {
+          throw new Error('Não foi possível realizar a consulta de endereço');
+        }
+        return response;
+      } else {
+        return address;
       }
-      return response;
     } catch (error) {
       console.error(error);
       throw new Error('Não foi possível realizar a consulta de endereço');
