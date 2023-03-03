@@ -57,7 +57,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-<h1>Configuração Inicial</h1>
+<h1>Configurações</h1>
 
 ## Docker e Banco de dados
 <ul>
