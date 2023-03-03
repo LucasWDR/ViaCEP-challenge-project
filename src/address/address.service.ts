@@ -11,7 +11,7 @@ export class AddressService {
     private readonly httpService: HttpService,
     @InjectRepository(Address)
     private addressRepository: Repository<Address>
-  ) { }
+  ) {}
 
   async getCepByAPI(cep: string): Promise<any> {
     try {
@@ -40,9 +40,8 @@ export class AddressService {
             return fileds;
           });
 
-        this.addressRepository.save(response)
+        this.addressRepository.save(response);
 
-        console.log(response)
         if (!response) {
           throw new Error('Não foi possível realizar a consulta de endereço');
         }
