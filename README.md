@@ -77,6 +77,13 @@ $ npm run test:cov
   <li>Se necessário, mudar as configurações no .env</li>
 </ul>
 
+## Tecnologias utilizadas e por quê
+<ul>
+  <li>Foi utilizado no projeto o framework NestJS, em conjunto com o ORM TypeORM</li>
+  <li>Utilizei a biblioteca "nestjs/typeorm" para auxiliar no banco</li>
+  <li>Foi utilizado no projeto o banco de dados PostgreSQL</li>
+</ul>
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
