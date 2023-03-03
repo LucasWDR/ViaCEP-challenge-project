@@ -57,6 +57,25 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+<h1>Configuração Inicial</h1>
+
+## Docker e Banco de dados
+<ul>
+  <li>Utilizando o docker, baixar a imagem do postgres com o comando: docker pull postgres</li>
+  <li>criar um container com a imagem do mysql, exemplo: docker run --name  postgres -e POSTGRES_PASSWORD=123456789 -p 5432:5432 -d postgres</li>
+  <li>Rodar o container criado</li>
+  <li>Adicionar uma nova conexão no dbeaver com postgres, colocando as informações do container criado acima</li>
+  <li>Caso necessário, ir em "Driver properties" e mudar a chave "allowPublicKeyRetrieval" de false para true</li>
+  <li>Dentro da conexão criada, criar um banco com o nome "challenge-teceo"</li>
+</ul>
+
+## Início do projeto
+<ul>
+  <li>O repositório principal é o master</li>
+  <li>Ao abrir o projeto, abra o terminal e dê o comando "npm i"</li>
+  <li>No app module, mude o synchronize para true, digite "npm run start:dev" e depois volte para false</li>
+  <li>Se necessário, mudar as configurações no .env</li>
+</ul>
 
 ## Support
 
