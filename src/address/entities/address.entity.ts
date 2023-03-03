@@ -20,5 +20,4 @@ export class Address extends BaseEntity {
  @Column({name: 'uf'})
   uf: string
 
-  
 }
