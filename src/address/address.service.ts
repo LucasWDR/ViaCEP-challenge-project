@@ -15,16 +15,17 @@ export class AddressService {
     private addressRepository: Repository<Address>
   ) { }
 
-  async getCepByAPI(cep): Promise<any> {
+  async getCepByAPI(cep: string): Promise<any> {
     try {
       //falta resolver aqui
-      const address = await this.addressRepository.findOneOrFail({
+
+      const address = await this.addressRepository.findOne({
         where: {
           cep: cep
         }   
       });
       console.log(address)
-      if (!address || []) {
+      if (!address) {
         const uri = 'https://viacep.com.br';
         const url = `${uri}/ws/${cep}/json/`;
 
