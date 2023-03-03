@@ -1,6 +1,5 @@
 import { BaseEntity } from "src/common/database/base-entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
 @Entity({ name: 'addresses'})
 export class Address extends BaseEntity {
  @PrimaryGeneratedColumn('uuid')
@@ -9,13 +8,13 @@ export class Address extends BaseEntity {
  @Column({name: 'cep'})
   cep: string
 
- @Column({name: 'public_place'}) //logradouro
+ @Column({name: 'public_place'})
   publicPlace: string
 
- @Column({name: 'neighborhood'})  //bairro
+ @Column({name: 'neighborhood'})
   neighborhood: string
 
- @Column({name: 'county'}) //municipio
+ @Column({name: 'county'})
   county: string
 
  @Column({name: 'uf'})
